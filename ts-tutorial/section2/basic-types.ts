@@ -53,7 +53,7 @@ employee2.firstName
 // object != Objectなので注意
 
 // empty type
-// object型かつpropertyを定義する場合の特別な例
+// object型かつpropertyを定義する場合の特別な例っぽい
 let vacant: {} = {};
 // propetyを持たないので下記はコンパイル時にエラー
 vacant.hoge
