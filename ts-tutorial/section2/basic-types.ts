@@ -59,3 +59,37 @@ let vacant: {} = {};
 vacant.hoge
 // Object型なので以下は実行可能
 vacant.toString()
+
+
+// Array types
+let skills: string[] = ["Test"];
+skills[1] = "Problem solving";
+skills.push("HogeHoge");
+// 互換性のない型の値の代入を防げる
+skills.push(100);
+let skill = skills[100];
+
+// JavaScriptのpropertyもアクセス可能
+console.log(skills.length)
+let series = [1,2,3];
+let double = series.map((e) => {e*2});
+
+// 複数の型の値を保持するArray
+// Union型になる
+let scores = ["HogeHuga",1, 2, ["Hoge"]];
+// type inferenceすると変数の型もUnion型になる
+let score = scores[1];
+
+// Union型の変数で参照できるpropertyはどうなるのか
+let scores2 = [[1], ["Hoge"]];
+let score2 = scores2[1]
+// Array型であることは共通しているのでArray型のlengthが利用できる
+score2.length
+
+let scores3 = [1, ["Hoge"]];
+let score3 = scores3[1] 
+// Object型のものしか使えない
+score3.toString
+
+// Union型の変数の場合，共通する型のproperty, methodしか参照できなさそう
+
