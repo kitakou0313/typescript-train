@@ -93,3 +93,19 @@ score3.toString
 
 // Union型の変数の場合，共通する型のproperty, methodしか参照できなさそう
 
+// Tuple型
+// 要素数，順番，型が一致している制約が追加されたArray型のような型
+
+let skillTuple: [string, number];
+skillTuple = ["Math", 100];
+skillTuple = [100, "Math"];
+
+let colorTuple: [number, number, number] = [255, 255, 255]
+// 型推論させるとArrayが優先される
+let color2Tuple = [255, 255, 255]
+
+// ? postfixを使用することでOptionの要素を定義できる
+let colorTupleWithOptional: [number, number, number, number?]
+colorTupleWithOptional = [255, 255, 255]
+colorTupleWithOptional = [255, 255, 255, 1]
+
