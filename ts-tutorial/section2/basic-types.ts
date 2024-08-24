@@ -109,3 +109,20 @@ let colorTupleWithOptional: [number, number, number, number?]
 colorTupleWithOptional = [255, 255, 255]
 colorTupleWithOptional = [255, 255, 255, 1]
 
+// Enum型
+// 定められた値の集合を表す型
+enum Month {Jan, Feb, Mar}
+
+function isJan(month:Month) {
+    switch (month) {
+        case Month.Jan:
+            return true
+        default:
+            return false
+    }
+}
+
+isJan(Month.Jan)
+// numberを与えても実行可能
+isJan(1)
+
