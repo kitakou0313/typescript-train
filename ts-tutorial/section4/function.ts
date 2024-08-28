@@ -17,3 +17,14 @@ let addWithFunctionType: (x: number, y: number) => number;
 addWithFunctionType = function (x:number, y:number) {
     return x+y
 }
+
+// Optional parameter
+// parametr名の後に?をつけることで任意の引数を定義できる
+function multiply(a:number,b:number, c?:number) {
+    // type annotationの型 と undefiedのUnion typeになる
+    // 他の変数のようには使えない
+    if (typeof c !== "undefined"){
+        return a*b*c
+    }
+    return a * b * c
+}
