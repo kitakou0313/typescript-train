@@ -86,3 +86,40 @@ class PersonWithReadonly {
 }
 
 // constは変数用であり，readonlyはClassのProperty用
+
+// inheritance 
+// 継承が使用可能
+
+class PersonBaseClass {
+    constructor(
+        private firstName: string,
+        private lastName: string
+    ) {
+        
+    }
+
+    getFullName(): string{
+        return `${this.firstName} ${this.lastName}`
+    }
+    describe(): string {
+        return `This is ${this.firstName} ${this.lastName}.`;
+    }
+}
+
+class Employee extends PersonBaseClass {
+    constructor(
+        firstName: string,
+        lastName: string,
+        private jobTitle: string
+    ) {
+        super(firstName, lastName)
+    }
+
+    // MethodのOverrideも可能
+    describe(): string {
+        return super.describe() + `:${ this.jobTitle}`
+    }
+}
+
+let employeeWithInheritance = new Employee("John", "Doe", "Web developer")
+employeeWithInheritance.getFullName()
