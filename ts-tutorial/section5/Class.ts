@@ -123,3 +123,55 @@ class Employee extends PersonBaseClass {
 
 let employeeWithInheritance = new Employee("John", "Doe", "Web developer")
 employeeWithInheritance.getFullName()
+
+// static properties, static methods
+// 全てのインスタンスで共有されるproperty, method
+class EmployeeWithStatic {
+    private static headcount: number = 0;
+    constructor(
+        private firstName: string,
+        private lastName: string,
+        private jobTitle: string
+    ) {
+        EmployeeWithStatic.headcount += 1
+    }
+
+    public static getHeadcount(){
+        return EmployeeWithStatic.headcount
+    }
+}
+
+let JohnStatic = new EmployeeWithStatic(
+    "John", "Doe", "FE Dev"
+)
+let janeStatic = new EmployeeWithStatic(
+    "Jane", "Doe", "BE Dev"
+)
+
+// Abstract class
+// 継承による実装を前提とするClass
+// 一つ以上のAbstract methodsを定義
+abstract class EmployeeWithAbstract {
+    constructor(
+        private name:string
+    ) {}
+    abstract getSalary(): number;
+
+    getCompensationStatement(): string{
+        return `${this.getSalary()}`
+    }
+}
+
+// Abstrace classからはインスタンスの生成はできない
+let employeeAbstract = new EmployeeWithAbstract("Bob")
+
+class Fulltime extends EmployeeWithAbstract {
+    constructor(
+        name:string, private slary:number
+    ) {
+        super(name);
+    }
+    getSalary(): number {
+        return this.slary
+    }
+}
