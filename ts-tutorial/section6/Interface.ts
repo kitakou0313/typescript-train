@@ -77,3 +77,78 @@ class PersonJson implements Json {
         return rawString + this.name
     }
 }
+
+// Interfaceの拡張
+// 既存のinterfaceにメソッドの定義を追加する
+// 既存のinterfaceを壊さず，新たに定義する場合に有効
+interface Mailable {
+    send(email: string): boolean
+    queue(email: string): boolean
+}
+
+interface FutureMailable extends Mailable{
+    later(email: string,after: number): boolean
+}
+
+// 拡張後のメソッドも含めて定義する
+class Mail implements FutureMailable{
+    later(email: string, after: number): boolean {
+        return true
+    }
+    queue(email: string): boolean {
+        return true
+    }
+    send(email: string): boolean {
+        return true
+    }
+}
+
+// 複数のinterfaceをextendsできる
+interface A {
+    a():boolean
+}
+interface B {
+    b():boolean
+}
+interface C extends A, B{
+    c(): boolean
+}
+
+class CClass implements C{
+    a(): boolean {
+        return false
+    }
+    b(): boolean {
+        return false
+    }
+    c(): boolean {
+        return false
+    }
+}
+
+// Classをextendsしたinterfaceも作成可能
+// private, protectedのアクセス制御が行われたproperty, methodも継承される
+// そのため，このinterfaceをimplementsできるのは元のClassのsubclassのみ
+
+class Control {
+    private state: boolean = false
+}
+
+interface StatefulControle extends Control{
+    enable(): void
+}
+
+// ControlのSub classなのでimplementsできる
+class Button extends Control implements StatefulControle {
+    enable(): void {
+        
+    }
+}
+// ControlのSub classではないためimplements不可
+// state propertyを実装する必要があるが，
+// - private propertyなのでsub classから参照不可
+// - 衝突するためsub class側では定義不可 
+class Label implements StatefulControle {
+    enable(): void {
+    }
+}
