@@ -30,3 +30,20 @@ let e:IntersectionEmployee = {
     email: "john@example.com",
     phone: "123456"
 }
+
+// Type Guard
+// conditional block(if文など)を使い変数の型を絞る機能
+type alphanumericTypeGuard = string | number;
+
+function addTypeGuard(a: alphanumericTypeGuard, b: alphanumericTypeGuard) {
+    // if文内のtypeof operatorによりブロック内ではa, bの型がnumberに絞られている
+    if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    }
+    // if文内のtypeof operatorによりブロック内ではa, bの型がstringに絞られている
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a.concat(b);
+    }
+
+    throw new Error('Invalid arguments. Both arguments must be either numbers or strings.');
+}
