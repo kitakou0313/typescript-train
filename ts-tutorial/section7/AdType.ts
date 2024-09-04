@@ -47,3 +47,29 @@ function addTypeGuard(a: alphanumericTypeGuard, b: alphanumericTypeGuard) {
 
     throw new Error('Invalid arguments. Both arguments must be either numbers or strings.');
 }
+
+// Type Assertion
+// （ある程度の制限があるものの）値の型を決定できる
+let el = document.querySelector('input[type="text"]')
+el.value;
+let inputEl = el as HTMLInputElement;
+console.log(inputEl.value);
+console.log((el as HTMLInputElement).value);
+
+// asでの利用，<>での利用の二種の利用形態がある
+inputEl = <HTMLInputElement>document.querySelector('input[type="text"]')
+
+// Type asserctionによるエラー
+// 1. Compile time errors
+// 互換性のない型間でType Assertionは不可
+// 上のAssertionができたのはHTMLInputElementがHTMLElementの子クラスであるため
+let priceTS = "9.99"
+let netPrice = <number>priceTS;
+
+// 2. Runtime errors
+// コンパイル時にエラーにならない場合でも，実行時に取得した値がPropertyを持たずエラーになるケース
+// Input Elementのケースではinput.valueが存在せず，undefinedになるなど
+
+// 3. それ以外の予期しない挙動
+
+// 使用には注意が必要そう 子クラス -> 親クラスの逆が可能になるため，2のエラーが容易に起きえそう
