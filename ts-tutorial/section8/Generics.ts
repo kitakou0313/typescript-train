@@ -29,3 +29,14 @@ let resultWithGenerics = mergeGenerics(
     { name: 'John' },
     {id: 12345}
 );
+
+// Genericsに制約を付加できる
+function mergeWithConstraint<U extends object, V extends object>(obj1:U, obj2:V) {
+    return {
+        ...obj1,...obj2
+    }
+}
+
+let result1 = mergeWithConstraint({name:"John"}, {id:12345});
+// object型の子クラスではないnumber型の値は渡せない
+let result2 = mergeWithConstraint({name:"John"}, 100);
