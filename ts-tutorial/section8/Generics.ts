@@ -40,3 +40,12 @@ function mergeWithConstraint<U extends object, V extends object>(obj1:U, obj2:V)
 let result1 = mergeWithConstraint({name:"John"}, {id:12345});
 // object型の子クラスではないnumber型の値は渡せない
 let result2 = mergeWithConstraint({name:"John"}, 100);
+
+// Type Constraintsに型パラメータを使用できる
+// keyof operatorで渡した型のkeyのliteralから構成されるUnion型が得られる
+function propWithConstraints<T, K extends keyof T>(obj1: T, key: K) {
+    return obj1[key];
+}
+
+propWithConstraints({name: "John"}, "name")
+propWithConstraints({name: "John"}, "age")
