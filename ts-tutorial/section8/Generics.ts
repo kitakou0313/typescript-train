@@ -49,3 +49,39 @@ function propWithConstraints<T, K extends keyof T>(obj1: T, key: K) {
 
 propWithConstraints({name: "John"}, "name")
 propWithConstraints({name: "John"}, "age")
+
+// GenericsとClass
+// 関数などの定義と同様に型パラメータを設定できる
+
+class Stack<T> {
+    private elements: T[] = [];
+
+    constructor(private size: number){};
+
+    isEmpty(): boolean {
+        return this.elements.length === 0;
+    }
+
+    isFull(): boolean {
+        return this.elements.length === this.size;
+    }
+
+    push(element: T){
+        if (this.isFull()) {
+            throw new Error();
+        }
+        this.elements.push(element)
+    }
+    pop(): T{
+        if(this.isEmpty()){
+            throw new Error()
+        }
+        return this.elements.pop() as T;
+    }
+}
+
+let numbersStack = new Stack<number>(4);
+let stringStack = new Stack<string>(4);
+
+let numbersStackEle = numbersStack.pop();
+let stringStackEle = stringStack.pop();
