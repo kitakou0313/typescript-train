@@ -85,3 +85,49 @@ let stringStack = new Stack<string>(4);
 
 let numbersStackEle = numbersStack.pop();
 let stringStackEle = stringStack.pop();
+
+// InterfaceでGenericsを使う
+// TSのGenericsはObject, Method, Classがある
+// 例1 objectのkeyとvalueの型指定
+interface PairGenerics<K, V>{
+    key: K,
+    value: V
+}
+
+let month: PairGenerics<string, number> = {
+    key: "Jan",
+    value: 1
+}
+
+// 例2 Class向けinterfaceでの使用
+interface Collection<T>{
+    add(o:T): void,
+    remove(o:T): void
+}
+
+// Classの定義で型パラメータを定義し，それをinterfaceに渡している
+class ListWithGenericeIF<T> implements Collection<T>{
+    private items: T[] = []
+    add(o: T): void {
+        this.items.push(o);
+    }
+    remove(o: T): void {
+        let indexOfo = this.items.indexOf(o);
+        if (indexOfo > -1) {
+            this.items.splice(indexOfo, 1)
+        }
+    }
+}
+
+let listOfGenerics = new ListWithGenericeIF<string>();
+listOfGenerics.add("1")
+listOfGenerics.remove("1")
+
+// 例3 indexの型を決められる
+interface Option<T> {
+    [name: string]: T
+}
+let inputOption: Option<boolean> = {
+    "disabled": true,
+    "visible": false
+}
