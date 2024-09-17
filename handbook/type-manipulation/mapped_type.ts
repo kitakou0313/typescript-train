@@ -23,3 +23,22 @@ type Features = {
     newUserProfile: () => void;
 }
 type FeatureOptions = OptionFlags<Features>
+
+// Modifiersを除外できる
+type CreateMutableType<T> = {
+    -readonly [Property in keyof T]: T[Property]
+}
+
+type LockedAccount = {
+    readonly id: string,
+    readonly name: string
+}
+
+
+type UnlockedAccount = CreateMutableType<LockedAccount>
+
+// as句を使うことで別名をつける
+type Getters<T> = {
+    [Prop in keyof T as `get${Capitalize<string & Prop>}` ]:() => T[Prop] 
+}
+type LazyPerson = Getters<Person>
