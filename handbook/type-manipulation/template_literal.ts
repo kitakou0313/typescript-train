@@ -11,3 +11,8 @@ type GreetingWithValue = `hello, ${typeof WorldString}`
 // Union型を用いることで複数の埋め込みも可能
 type Worlds = "world1" | "world2"
 type GreetingFromUnionType = `hello, ${Worlds}`
+
+// String型の値の操作を行うクラス
+type GreetingToBeManupilated = "Hello, world"
+type ShoutyGreeting = Uppercase<GreetingToBeManupilated>
+type CapitalizedGreeting = Capitalize<GreetingToBeManupilated>
