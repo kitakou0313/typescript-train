@@ -61,3 +61,41 @@ y_function_return = x_function_return
 // 共通する考え方として，代入される変数の型に期待されるinterfaceと返り値を満たせる場合に互換性があると判定されていそう
 //   引数の場合...代入される変数の型の引数で呼び出されてもエラーが起きない関数であればよい -> 必要な引数が渡されば引数が捨てられても良い
 //   返り値の場合...代入される変数の型の後続処理で参照されるよう，propretyが含まれればよい -> 必要なpropetyを持つなら多くても問題ない
+
+// Enumの互換性
+// number型とは互換性がある
+// 他のEnum型とは互換性が無い
+enum Status {
+    Ready,
+    Waiting
+}
+enum Color {
+    Red, 
+    Blue, 
+    Green
+}
+
+let statusCompati: Status = Status.Ready
+statusCompati = 1
+statusCompati = Color.Blue
+
+// Classの互換性
+// instanceのmemberのみ比較される
+// static memberやコンストラクタは考慮されない
+
+class AnimalForCompati {
+    feet: number;
+    constructor(name:string, numFeet: number){}
+}
+
+class SizeForCompati {
+    feet: number;
+    constructor(numFeet: number) {}
+}
+
+let a: AnimalForCompati
+let b: SizeForCompati
+
+// Constructorのシグネチャが異なっても代入可能
+a = b;
+b = a;
