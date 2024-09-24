@@ -99,3 +99,20 @@ let b: SizeForCompati
 // Constructorのシグネチャが異なっても代入可能
 a = b;
 b = a;
+
+// Private, Protectedなmemberは影響する
+class AnimalWithPrivate {
+    feet: number
+    private name: string
+    constructor(name:string ,numFeet: number) {
+    }
+}
+
+let c: AnimalWithPrivate
+// Source Type(AnimalForCompati)にTarget TypeのPrivete member(name)が無いので代入不可
+c = a
+// Source Type(AnimalWithPrivate)にPrivate memberが無く互換性があるため代入可能
+a = c
+
+c = b
+b = c
