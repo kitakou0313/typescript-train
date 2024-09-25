@@ -116,3 +116,26 @@ a = c
 
 c = b
 b = c
+
+// Generics
+// 型パラメータがmemberの型の一部として使用された場合のみ影響する
+
+// memberの型として使用しないケース
+interface Empty<T>{}
+let x: Empty<number>
+let y: Empty<string>
+// 互換性がある
+x = y
+y = x
+
+// memberの型に使用されるケース
+interface NotEmpty<T> {
+    data: T
+}
+let z: NotEmpty<number>
+let xx: NotEmpty<string>
+xx = z
+z = xx
+
+// target propertyをすべて持つので以下は可能
+x = xx
