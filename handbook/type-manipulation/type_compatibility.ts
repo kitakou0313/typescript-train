@@ -139,3 +139,15 @@ z = xx
 
 // target propertyをすべて持つので以下は可能
 x = xx
+
+// 具体的な型を指定されないType argumentの場合，any型として扱われる
+
+let indentity = function <T>(x: T): T {
+    return x
+}
+let reverse = function <U>(y: U): U {
+    return y
+}
+
+// y(any型)と互換性のある引数xを持つため代入可能
+indentity = reverse
